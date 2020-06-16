@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const genreSchema = Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   }
 });
 

@@ -9,6 +9,12 @@ db.once('open', () => console.log('Connected to db'));
 
 const app = express();
 
+//static file
+app.use(express.static(path.join(__dirname, 'public')));
+//view engine
+app.set('view', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 app.get('/', (req, res) => {
   res.send('Hello world');
 })
