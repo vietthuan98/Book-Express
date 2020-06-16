@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2 Genres
+  .list-group.p-3.pb-5
+    if genres
+      each genre,i in genres
+        a.list-group-item.list-group-item-action(href='#')=genre.name
+
+
+
+
+  h2 Create a new genre
+  form.p-3(method='POST', action='/genres')
+    .form-group
+      label(for='genre') A new genre
+      input#genre.form-control(type='text' placeholder='New genre', name='name')
+    button.btn.btn-primary(type='submit') Create
