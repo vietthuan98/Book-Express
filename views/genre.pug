@@ -5,10 +5,7 @@ block content
   .list-group.p-3.pb-5
     if genres
       each genre,i in genres
-        a.list-group-item.list-group-item-action(href='#')=genre.name
-
-
-
+        a.list-group-item.list-group-item-action(href='/genres/'+genre._id)=genre.name
 
   h2 Create a new genre
   form.p-3(method='POST', action='/genres')

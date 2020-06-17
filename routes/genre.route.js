@@ -7,4 +7,6 @@ router.get('/', controllers.getGenres);
 
 router.post('/', controllers.postGenre);
 
+// router.get('/:id', controllers.getBooksByGenreId);
+
 module.exports = router;

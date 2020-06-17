@@ -6,7 +6,9 @@ const genreSchema = Schema({
     type: String,
     required: true,
     trim: true
-  }
+  },
+  book: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 });
 
-module.exports = mongoose.model('Genre', genreSchema);
+const Genre = mongoose.model('Genre', genreSchema);
+module.exports = Genre;

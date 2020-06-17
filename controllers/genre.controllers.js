@@ -1,4 +1,5 @@
 const Genre = require('../models/genre.model');
+const Book = require('../models/book.model');
 
 //index
 module.exports.getGenres = async (req, res, next) => {
@@ -29,3 +30,17 @@ module.exports.postGenre = async (req, res, next) => {
     next(err);
   }
 }
+
+//render book by genre id
+// module.export.getBooksByGenreId = async (req, res, next) => {
+//   const query = {genre: req.params.id};
+//   try {
+//     const books = Book.find(query)
+//     res.render('book', {
+//       title: 'Book',
+//       books
+//     })
+//   } catch (err) {
+//     next(err);
+//   }
+// }

@@ -12,9 +12,8 @@ const authorSchema = Schema({
     required: true,
     trim: true
   },
-  book: [
-    {type: Schema.Types.ObjectId, ref='Book'}
-  ]
+  book: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 });
 
-module.exports = mongoose.model('Author', authorSchema);
+const Author = mongoose.model('Author', authorSchema);
+module.exports = Author;
