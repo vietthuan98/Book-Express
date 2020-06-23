@@ -7,7 +7,7 @@ const genreSchema = Schema({
     required: true,
     trim: true
   },
-  book: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 });
 
 const Genre = mongoose.model('Genre', genreSchema);

@@ -5,7 +5,9 @@ block content
   .list-group.p-3.pb-5
     if genres
       each genre,i in genres
-        a.list-group-item.list-group-item-action(href='/genres/'+genre._id)=genre.name
+        .list-group-item.list-group-item.d-flex.justify-content-between
+          p=genre.name
+          a(href='/genres/'+genre._id+'/book') Add book
 
   h2 Create a new genre
   form.p-3(method='POST', action='/genres')

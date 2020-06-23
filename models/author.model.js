@@ -7,12 +7,11 @@ const authorSchema = Schema({
     required: true,
     trim: true
   },
-  nationality: {
+  national: {
     type: String,
-    required: true,
     trim: true
   },
-  book: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 });
 
 const Author = mongoose.model('Author', authorSchema);

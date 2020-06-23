@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h2.py-3 Create a new auther
+  form.p-3(method='POST', action= actionPath ? actionPath : '')
+    .form-group
+      if genre
+        h4 Genre: #{genre.name}
+      if book
+        h3 Title: #{book.title}
+        img(src=book.img alt='Image of #{book.title}' style='height: 200px; width: auto')
+        p Description: #{book.description}
+        h5 Price: #{book.price}
+
+    .form-group
+      label(for='author') Author
+      select#author.custom-select(name='author')
+        option(value=null).selected Choose...
+        if authors
+          each author,i in authors
+            option(value=author.name)=author.name
+    h4 Another
+    .form-group
+      label(for='author') Author
+      input#author.form-control(type='text' placeholder='Author', name='anotherAuthor')
+    .form-group
+      label(for='national') National
+      input#national.form-control(type='text' placeholder='National', name='national')
+    button.btn.btn-primary(type='submit') Create

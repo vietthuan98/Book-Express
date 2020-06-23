@@ -1,0 +1,16 @@
+extend layout
+
+block content
+  .d-flex.flex-row.flex-wrap
+    if books
+      each book,i in books
+        .card.mt-3.mr-3(style='width: 18rem;')
+          img.card-img-top(src=book.img alt='...')
+          .card-body
+            h4.card-title=book.title
+            h5.card-title=book.author
+            p.card-text=book.description
+            p.card-text.font-weight-bold.font-italic=book.price+' VND'
+            a.btn.btn-primary(href='#') Add to cart
+
+  
