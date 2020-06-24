@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .new-genre.p-3.mb-5
+    h2 Create a new genre
+    form.p-3(method='POST', action=actionPath ? actionPath : '')
+      .form-group
+        label(for='genre') A new genre
+        input#genre.form-control(type='text' placeholder='New genre', name='name')
+      button.btn.btn-primary(type='submit') Create
+
+  .genre.p-3
+    h2.pb-2 Current genres
+    .list-group
+      if genres
+        each genre,i in genres
+          .list-group-item.list-group-item.d-flex.justify-content-between
+            p=genre.name
+            a.btn.btn-primary(href='/creation/'+genre._id+'/book') Add a new book
+
+  

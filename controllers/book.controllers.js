@@ -5,7 +5,7 @@ const Author = require('../models/author.model');
 
 module.exports.getBooks = async (req, res, next) => {
   try {
-    const books = await Book.find({});
+    const books = await Book.find({}).populate('author');
     res.render('book', {
       title: 'Book',
       books
