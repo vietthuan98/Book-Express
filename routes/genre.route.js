@@ -8,4 +8,6 @@ router.get('/', controllers.getGenres);
 
 router.post('/', controllers.postGenre);
 
+router.get('/:genreId/books', controllers.getGenreBook);
+
 module.exports = router;

@@ -20,17 +20,17 @@ module.exports.postGenre = async (req, res, next) => {
   res.json(req.baseUrl)
 }
 
-
-//render book by genre id
-// module.export.getBooksByGenreId = async (req, res, next) => {
-//   const query = {genre: req.params.id};
-//   try {
-//     const books = Book.find(query)
-//     res.render('book', {
-//       title: 'Book',
-//       books
-//     })
-//   } catch (err) {
-//     next(err);
-//   }
-// }
+//get books by id
+module.exports.getGenreBook = async (req, res, next) => {
+  try {
+    const { genreId } = req.params;
+    const books = await Book.find({genre: genreId});
+    const genre = await Genre.findById({_id: genreId});
+    res.render('book', {
+      title: `${genre.name}'s books`,
+      books
+    })
+  } catch (err) {
+    next(err);
+  }
+}

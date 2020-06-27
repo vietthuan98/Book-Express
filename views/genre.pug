@@ -6,6 +6,6 @@ block content
     .list-group
       if genres
         each genre,i in genres
-          a.list-group-item.list-group-item-action(href='#') #{genre.name}
+          a.list-group-item.list-group-item-action(href=`/genres/${genre._id}/books`) #{genre.name}
 
   

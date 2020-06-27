@@ -28,6 +28,20 @@ module.exports = {
     } catch (err) {
       next(err);
     }
+  },
+
+  getAuthorBooks: async (req, res, next) => {
+    try {
+      const { authorId } = req.params;
+      const books = await Book.find({author: authorId})
+      const author = await Author.findById({_id: authorId});
+      res.render('book', {
+        title: `${author.name}'s books`,
+        books
+      })
+    } catch (err) {
+      next(err);
+    }
   }
 
 }
