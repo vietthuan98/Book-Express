@@ -37,10 +37,13 @@ app.get('/', (req, res) => {
 //Route files
 const genre = require('./routes/genre.route');
 const book = require('./routes/book.route');
+const author = require('./routes/author.route');
 const creation = require('./routes/creation.route');
 
 app.use('/genres', genre);
 app.use('/books', book);
+app.use('/authors', author);
 app.use('/creation', creation);
+
 
 app.listen(3000, () => console.log('App listening at http://localhost:'+ 3000));
