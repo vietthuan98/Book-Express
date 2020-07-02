@@ -1,0 +1,37 @@
+extends layout
+block content
+  h1.my-2 Register
+  if messages
+    each message in messages
+      .alert.alert-danger=message
+  
+  form.form-login(method='post', action=actionPath ? actionPath : '', enctype='multipart/form-data')
+    .form-group
+      label(for='email') Email
+      input.form-control#email(type='email', placeholder="Enter email" name='email')
+    .form-group
+      label(for='first-name') First name
+      input.form-control#first-name(type='text', placeholder="First name", name='firstName')
+    .form-group
+      label(for='last-name') Last name
+      input.form-control#last-name(type='text', placeholder="Last name", name='lastName')
+    .form-group
+      label(for='address') Address
+      input.form-control#address(type='text', placeholder="Address", name='address') 
+    .form-group
+      label(for='phone') Phone
+      input.form-control#phone(type='text', placeholder="Phone", name='phone')   
+    .form-group
+      .custom-file
+        input#img.custom-file-input(type='file', name='avatar')
+        label.custom-file-label(for='img') Choose avatar
+    .form-group
+      label(for='password') Password
+      input.form-control#password(type='password', placeholder="Enter password", name='password')
+    .form-group
+      label(for='confirmPassword') Confirm password
+      input.form-control#confirmPassword(type='password', placeholder="Confirm password", name='confirmPassword')     
+    button.mt-2.btn.btn-primary(type='submit') Register
+    small.form-text.text-muted You already have an account, don't you"
+      a(href='/auth/login') Click here to login.
+    

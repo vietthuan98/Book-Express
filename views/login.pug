@@ -1,0 +1,17 @@
+extends layout
+block content
+  h1.my-2 Login
+  if messages
+    each message in messages
+      .alert.alert-danger=message
+  form.form-login(method='post', action=actionPath ? actionPath : '')
+    .form-group
+      label(for='email') Email
+      input.form-control#email(type='email', placeholder="Enter email", name='email')
+    .form-group
+      label(for='password') Password
+      input.form-control#password(type='password', placeholder="Enter password", name='password')
+    button.mt-2.btn.btn-primary(type='submit') Login
+    small.form-text.text-muted You don't have an account, do you? 
+      a(href='/auth/register') Click here to register.
+    
