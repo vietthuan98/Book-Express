@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
 
@@ -30,6 +31,9 @@ app.use(bodyParser.json())
 
 //static file
 app.use(express.static(path.join(__dirname, 'public')));
+
+//cookie
+app.use(cookieParser());
 
 //session middleware
 app.use(session({

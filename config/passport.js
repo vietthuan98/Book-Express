@@ -2,6 +2,7 @@ const passport = require('passport');
 const User = require('../models/user.model');
 const { Strategy } = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const { validationResult } = require('express-validator');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -19,17 +20,22 @@ passport.use('local.register', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, (req, email, password, done) => {
+  // const errors = validationResult(req).array();
+  // if (errors) {
+  //   let messages = [];
+  //   errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
+  //   return done(null, false, req.flash('error', messages));
+  // }
+  const { firstName, lastName, address, phone, confirmPassword } = req.body;
   User.findOne({'email': email}, (err, user) => {
-    const { email, firstName, lastName, address, phone, password, confirmPassword } = req.body;
-
-    if(err) {
+    if (err) {
       return done(err);
     }
-    if(user) {
+    if (user) {
       return done(null, false, { message: 'Email is already in use.' });
     }
-    if(password !== confirmPassword) {
-      return done(null, false, { message: 'Confirmed password is wrong.' });      
+    if (password !== confirmPassword) {
+      return done(null, false, { message: 'Confirmed password is wrong.' });
     }
     //create a new user
     const avatar = [''].concat(req.file.path.split('\\').slice(1)).join('/');

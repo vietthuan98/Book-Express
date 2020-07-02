@@ -1,5 +1,11 @@
 const passport = require('passport');
 
+//validator
+
+
+
+
+
 module.exports = {
   getLogin: async (req, res, next) => {
     let messages = req.flash('error');
@@ -18,7 +24,6 @@ module.exports = {
 
   getRegister: async (req, res, next) => {
     let messages = req.flash('error');
-    console.log(messages);
     res.render('register', {
       title: "Register",
       actionPath: `${req.originalUrl}`,

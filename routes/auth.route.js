@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controllers = require('../controllers/auth.controllers');
 const multer = require('../middlewares/multer.middleware');
+const { registerValidator } = require('../middlewares/validator.middleware');
 
 router.get('/login', controllers.getLogin);
 
