@@ -20,12 +20,14 @@ passport.use('local.register', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, (req, email, password, done) => {
-  // const errors = validationResult(req).array();
-  // if (errors) {
-  //   let messages = [];
-  //   errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
-  //   return done(null, false, req.flash('error', messages));
-  // }
+  let errors = validationResult(req);
+  if (errors.length) {
+    errors = errors.array();
+    let messages = [];
+    errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
+    return done(null, false, req.flash('error', messages));
+  }
+  
   const { firstName, lastName, address, phone, confirmPassword } = req.body;
   User.findOne({'email': email}, (err, user) => {
     if (err) {
@@ -38,7 +40,15 @@ passport.use('local.register', new LocalStrategy({
       return done(null, false, { message: 'Confirmed password is wrong.' });
     }
     //create a new user
-    const avatar = [''].concat(req.file.path.split('\\').slice(1)).join('/');
+    //check req.file to set avatar
+    let avatar;
+    if (req.file === undefined) {
+      //avatar default
+      avatar = undefined;
+    } else {
+      //config avatar's path to user's avatar
+      avatar = [''].concat(req.file.path.split('\\').slice(1)).join('/');
+    }
     let newUser = new User({
       email,
       firstName,

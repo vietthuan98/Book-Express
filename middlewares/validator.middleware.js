@@ -5,6 +5,5 @@ module.exports = {
     body('email').isEmail(),
     body('phone').isNumeric(),
     body('password').isLength({min: 6, max: 30})
-
   ],
 }

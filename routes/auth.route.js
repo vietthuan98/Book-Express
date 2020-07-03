@@ -11,6 +11,6 @@ router.post('/login', controllers.postLogin);
 
 router.get('/register', controllers.getRegister);
 
-router.post('/register', multer.single('avatar'), controllers.postRegister);
+router.post('/register', multer.single('avatar'), registerValidator, controllers.postRegister);
 
 module.exports = router;
