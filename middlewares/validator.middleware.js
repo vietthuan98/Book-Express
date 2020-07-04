@@ -20,6 +20,7 @@ module.exports = {
   ],
 
   addAuthorValidator: [
+    body('author', 'Author is required.').notEmpty(),
     body('anotherAuthor', 'Author name is required.').notEmpty(),
     body('national', 'National name is required.').notEmpty(),
   ]

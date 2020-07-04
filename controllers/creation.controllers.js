@@ -70,9 +70,11 @@ module.exports = {
 
   postBook: async (req, res, next) => {
     try {
-      let errors = validationResult(req).array();
+      //find Genre
       const { genreId } = req.params
       const genre = await Genre.findById({_id: genreId});
+      //check body
+      let errors = validationResult(req).array();
       if (errors.length) {
         let messages = [];
         errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
@@ -87,8 +89,6 @@ module.exports = {
       //config path url for book's img 
       const pathImg = [''].concat(req.file.path.split('\\').slice(1)).join('/');
       //find Genre
-      const { genreId } = req.params;
-      const genre = await Genre.findById({_id: genreId});
       // create a new book
       const newBook = new Book({
         title: req.body.title,
@@ -135,6 +135,7 @@ module.exports = {
     try { 
       const { genreId, bookId } = req.params;
       const book = await Book.findById({_id: bookId});
+      let errors = validationResult(req).array();
       if (errors.length) {
         let messages = [];
         errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
