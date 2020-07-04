@@ -71,11 +71,11 @@ module.exports = {
   postBook: async (req, res, next) => {
     try {
       let errors = validationResult(req).array();
+      const { genreId } = req.params
+      const genre = await Genre.findById({_id: genreId});
       if (errors.length) {
         let messages = [];
         errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
-        const { genreId } = req.params
-        const genre = await Genre.findById({_id: genreId});
         res.render('addBook', {
           pathAction: `${req.baseUrl}/${genreId}/book`,
           title: 'Add a new book',
@@ -135,6 +135,19 @@ module.exports = {
     try { 
       const { genreId, bookId } = req.params;
       const book = await Book.findById({_id: bookId});
+      if (errors.length) {
+        let messages = [];
+        errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
+        res.render('addAuthor', {
+          title: `Add a new book's author`,
+          pathAction: `${req.baseUrl}/${genreId}/book/${bookId}/author`,
+          book,
+          genre,
+          authors,
+          messages
+        });
+        return;
+      }
       //check author
       let author;
       const notAuthor = /^Choose\.{3}$/g.test(req.body.author); //req.body.author ='Choose...' => false

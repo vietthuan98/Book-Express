@@ -17,5 +17,10 @@ module.exports = {
     body('description', 'Description is required.').notEmpty(),
     body('description', 'Description is too long.').isLength({max: 250}),
     body('price').notEmpty().withMessage('Price is required.').matches(/\d/).withMessage('Price have to contain numbers')
+  ],
+
+  addAuthorValidator: [
+    body('anotherAuthor', 'Author name is required.').notEmpty(),
+    body('national', 'National name is required.').notEmpty(),
   ]
 }

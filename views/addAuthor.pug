@@ -3,6 +3,10 @@ extends layout
 block content
   h2.py-3 Create a new auther
   form.p-3(method='POST', action= actionPath ? actionPath : '')
+    if messages
+      each message in messages
+        .alert.alert-danger=message
+
     .form-group
       if genre
         h4 Genre: #{genre.name}
