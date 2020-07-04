@@ -6,6 +6,9 @@ block content
   .form-group
       if genre
         h4 Genre: #{genre.name}
+  if messages
+    each message in messages
+      .alert.alert-danger=message
 
   form.p-3(action= pathAction ? pathAction : '', method='POST', enctype='multipart/form-data')
     .form-group   

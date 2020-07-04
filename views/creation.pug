@@ -1,13 +1,17 @@
 extends layout
 
 block content
-  .new-genre.p-3.mb-5
+  .new-genre.p-3.mb-5      
     h2 Create a new genre
     form.p-3(method='POST', action=actionPath ? actionPath : '')
       .form-group
         label(for='genre') A new genre
         input#genre.form-control(type='text' placeholder='New genre', name='name')
       button.btn.btn-primary(type='submit') Create
+    
+    if messages
+      each message in messages
+        .alert.alert-danger=message
 
   .genre.p-3
     h2.pb-2 Current genres

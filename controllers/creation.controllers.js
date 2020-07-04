@@ -1,7 +1,7 @@
 const Genre = require('../models/genre.model');
 const Book = require('../models/book.model');
 const Author = require('../models/author.model');
-const { findOne } = require('../models/genre.model');
+const { validationResult } = require('express-validator');
 
 
 module.exports = {
@@ -22,8 +22,21 @@ module.exports = {
   postGenre: async (req, res, next) => {
     try {
       const genre = await Genre.findOne({name: req.body.name});
+      const genres = await Genre.find({});
+      let errors = validationResult(req).array();
+      if(errors.length) {
+        let messages = [];
+        errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
+        console.log(messages);
+        res.render('creation', {
+          title: 'Genres',
+          actionPath: `${req.baseUrl}`,
+          genres,
+          messages
+        });
+        return;
+      }
       if(!genre) {
-        console.log('chua ton tai');
         const newGenre = new Genre({
           name: req.body.name
         })
@@ -36,12 +49,6 @@ module.exports = {
         });
         return;
       }
-      const genres = await Genre.find({});
-      res.render('creation', {
-        title: 'Genres',
-        actionPath: `${req.baseUrl}`,
-        genres
-      });
     } catch (err) {
       next(err);
     }
@@ -63,6 +70,20 @@ module.exports = {
 
   postBook: async (req, res, next) => {
     try {
+      let errors = validationResult(req).array();
+      if (errors.length) {
+        let messages = [];
+        errors.forEach(error => messages.push(`${error.param.toUpperCase()}: ${error.msg}`));
+        const { genreId } = req.params
+        const genre = await Genre.findById({_id: genreId});
+        res.render('addBook', {
+          pathAction: `${req.baseUrl}/${genreId}/book`,
+          title: 'Add a new book',
+          genre: genre,
+          messages
+        });
+        return;
+      }
       //config path url for book's img 
       const pathImg = [''].concat(req.file.path.split('\\').slice(1)).join('/');
       //find Genre
@@ -99,6 +120,7 @@ module.exports = {
       const authors = await Author.find();
   
       res.render('addAuthor', {
+        title: `Add a new book's author`,
         pathAction: `${req.baseUrl}/${genreId}/book/${bookId}/author`,
         book,
         genre,
